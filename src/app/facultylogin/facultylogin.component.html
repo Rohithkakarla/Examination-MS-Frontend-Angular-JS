@@ -1,0 +1,40 @@
+<br>
+<br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body style="font-family:monaco;">     
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <ul class="tab-group">
+                    <li class="tab"><a href="/adminlogin">Admin Login</a></li>
+                    <li class="tab"><a href="/studentlogin">Student Login</a></li>
+                    <li class="tab active"><a>Faculty Login</a></li>
+                  </ul>
+                <form style="background-color:beige;padding:30px;" [formGroup]="facultyloginform">
+                    <div class="form-group">
+                      <label for="facultyid">Faculty ID</label>
+                      <input formControlName="facultyid" type="text" class="form-control" id="userid" placeholder="Enter Faculty ID" style="height:40px;border-radius: 1px;">
+                    </div>
+                    <div class="form-group">
+                      <label for="password">Password</label>
+                      <input formControlName="password" type="password" class="form-control" id="password" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary" (click)="facultylogin()">Submit</button>
+                  </form>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+
+</body>
+</html>

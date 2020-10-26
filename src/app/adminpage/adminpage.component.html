@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Admin | Home Page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body style="font-family:monaco;">
+
+<div class="row">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-9">
+    <br>
+    <label style="font-weight:bold;font-size:30px;">Administrator</label>
+  <button class="btn btn-dark" (click)="router.navigate(['/adminlogin']);" style="padding:10px;font-size:25px;float: right;">Log Out</button>
+    <br>
+    <br>
+    <ngb-tabset class="tab-solid tab-solid-danger">
+      <ngb-tab title="Students">
+        <ng-template ngbTabContent>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Student ID</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let student of studentdetails;">
+                  <td> {{student.userid}} </td>
+                  <td> {{student.name}} </td>
+                  <td> {{student.email}} </td>
+                  <td> {{student.status}} </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <br>
+          <label style="font-weight:bold;">Add Student</label>
+          <form [formGroup]="studentform">
+            <div class="form-row">
+              <div class="col form-group">
+                <input formControlName="studentid" type="text" class="form-control" placeholder="Student ID">
+              </div>
+              <div class="col form-group">
+                <input formControlName="name" type="text" class="form-control" placeholder="Name">
+              </div>
+              <div class="col form-group">
+                <input formControlName="email" type="email" class="form-control" placeholder="Email">
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="col form-group">
+                <input formControlName="password" type="password" class="form-control" placeholder="password">
+              </div>
+              <div class="col form-group">
+                <select formControlName="status" name="status" class="form-control" placeholder="status">
+                  <option value="true">True</option>
+                  <option value="false">False</option>
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="form-row">
+              <button class="btn btn-primary" style="float: right;" (click)="addstudent()">Add Student</button>
+            </div>
+          </form>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab title="Faculty">
+        <ng-template ngbTabContent>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Faculty ID</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let faculty of facultydetails;">
+                  <td> {{faculty.facultyid}} </td>
+                  <td> {{faculty.name}} </td>
+                  <td> {{faculty.email}} </td>
+                  <td> {{faculty.status}} </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <br>
+          <label style="font-weight:bold;">Add Faculty</label>
+          <form [formGroup]="facultyform">
+            <div class="form-row">
+              <div class="col form-group">
+                <input formControlName="facultyid" type="text" class="form-control" placeholder="Faculty ID">
+              </div>
+              <div class="col form-group">
+                <input formControlName="name" type="text" class="form-control" placeholder="Name">
+              </div>
+              <div class="col form-group">
+                <input formControlName="email" type="text" class="form-control" placeholder="Email">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col form-group">
+                <input formControlName="password" type="text" class="form-control" placeholder="password">
+              </div>
+              <div class="col form-group">
+                <select formControlName="status" name="status" class="form-control">
+                  <option value="true">True</option>
+                  <option value="false">False</option>
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="form-row">
+              <button class="btn btn-primary" style="float: right;" (click)="addfaculty()">Add Faculty</button>
+            </div>
+          </form>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab title="Courses">
+        <ng-template ngbTabContent>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Course ID</th>
+                  <th>Name</th>
+                  <th>Faculty Name</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let course of coursedetails;">
+                  <td> {{course.courseid}} </td>
+                  <td> {{course.name}} </td>
+                  <td> {{course.facultyid}} </td>
+                  <td> {{course.status}} </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <br>
+          <label style="font-weight:bold;">Add Course</label>
+          <form [formGroup]="courseform">
+            <div class="form-row">
+              <div class="col form-group">
+                <input formControlName="courseid" type="text" class="form-control" placeholder="Course ID">
+              </div>
+              <div class="col form-group">
+                <input formControlName="name" type="text" class="form-control" placeholder="Name">
+              </div>
+            </div>
+           <br>
+            <div class="form-row">
+              <div class="col form-group">
+                <select formControlName="facultyid" name="facultyid" class="form-control">
+                  <option *ngFor="let faculty of facultydetails" [value]="faculty.facultyid">{{ faculty.facultyid }}</option>
+                </select>
+              </div>
+              <div class="col form-group">
+                <select formControlName="status" name="status" class="form-control">
+                  <option value="true">True</option>
+                  <option value="false">False</option>
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="form-row">
+              <button class="btn btn-primary" style="float: right;" (click)="addcourse()" >Add Course</button>
+            </div>
+          </form>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+  </div>
+  <div class="col-sm-1"></div>
+</div>
+
+
+</body>
+</html>
+
+
+<!--
+create table exam(
+   id INT NOT NULL AUTO_INCREMENT,
+   name VARCHAR(100) NOT NULL,
+   courseid VARCHAR(40) NOT NULL,
+   facultyid VARCHAR(40) NOT NULL,
+   PRIMARY KEY ( id )
+);
+-->

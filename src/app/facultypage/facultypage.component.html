@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body style="font-family:monaco;">
+
+<div class="container">
+    <br>
+    <br>
+    <label style="font-weight:bold;font-size:30px;">Welcome {{ facultyname }} [ {{ facultyid }} ]</label>
+    <button class="btn btn-dark" (click)="router.navigate(['/facultylogin']);" style="padding:10px;font-size:25px;float: right;">Log Out</button>
+    <br>
+    <br>
+    <ngb-tabset class="tab-solid tab-solid-danger">
+      <ngb-tab title="Courses">
+        <ng-template ngbTabContent>
+          <div *ngFor="let course of coursedetails">
+            <div class="card" style="background-color: azure;">
+              <div class="card-body">
+                <h5 class="card-title" style="font-weight:bold;font-size:20px;"> {{ course.courseid }}</h5>
+                <p class="card-text"> {{ course.name}}</p>
+                <p class="card-text" ><span style="font-weight:bold;">Faculty ID :</span> {{ course.facultyid }} </p>
+              </div>
+            </div>
+            <br style="background-color: white;">
+          </div>
+          
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab title="Exams">
+        <ng-template ngbTabContent>
+          <div *ngIf="noexams">No Exams for this Courses</div>
+          <div *ngIf="!noexams">
+            <div *ngFor="let exam of examdetails">
+              <div class="card" style="background-color: azure;">
+                <div class="card-body">
+                  <h5 class="card-title" style="font-weight:bold;font-size:20px;"> {{ exam.name }} {{ exam.courseid }} </h5>
+                </div>
+              </div>
+              <br style="background-color: white;">
+            </div>
+          </div>
+          
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab title="Schedule an Exam">
+        <ng-template ngbTabContent>
+          <label style="font-weight:bold;">Schedule an Exam</label>
+          <form [formGroup]="examform">
+            <div class="form-row">
+              <div class="col form-group">
+                <input formControlName="name" type="text" class="form-control" placeholder="Exam Name">
+              </div>
+              <div class="col form-group">
+                <select formControlName="courseid" name="status" class="form-control">
+                  <option *ngFor="let course of coursedetails" [value]="course.courseid">{{ course.courseid }}</option>
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="form-row">
+              <button class="btn btn-primary" style="float: right;" (click)="scheduleexam()" >Schedule Exam</button>
+            </div>
+          </form>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+</div>
+
+</body>
+</html>

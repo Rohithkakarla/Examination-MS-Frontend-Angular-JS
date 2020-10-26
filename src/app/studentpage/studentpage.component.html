@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body style="font-family:monaco;">
+
+<div class="container">
+    <br>
+    <br>
+    <label style="font-weight:bold;font-size:30px;">Welcome {{ studentname }} [ {{ studentid }} ]</label>
+    <button class="btn btn-dark" (click)="router.navigate(['/studentlogin']);" style="padding:10px;font-size:25px;float: right;">Log Out</button>
+    <br>
+    <br>
+    <ngb-tabset class="tab-solid tab-solid-danger">
+      <ngb-tab title="Exams">
+        <ng-template ngbTabContent>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Exam Name</th>
+                  <th>Course ID</th>
+                  <th>Faculty ID</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let exam of examdetails">
+                  <td>{{ exam.name }} </td>
+                  <td>{{ exam.courseid }} </td>
+                  <td>{{ exam.facultyid }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab title="Courses">
+        <ng-template ngbTabContent>
+          <div *ngFor="let course of coursedetails">
+            <div class="card" style="background-color: azure;">
+              <div class="card-body">
+                <h5 class="card-title" style="font-weight:bold;font-size:20px;"> {{ course.courseid }}</h5>
+                <p class="card-text"> {{ course.name}}</p>
+                <p class="card-text" ><span style="font-weight:bold;">Faculty ID :</span> {{ course.facultyid }} </p>
+              </div>
+            </div>
+            <br style="background-color: white;">
+          </div>
+          
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+</div>
+
+</body>
+</html>
